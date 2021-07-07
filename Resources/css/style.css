@@ -17,6 +17,7 @@ body {
     line-height: 1.6;
     background: var(--clr-neutral-900);
     font-family: sans-serif;
+    padding-right: 15em;
 }
 
 .card {
@@ -27,7 +28,7 @@ body {
     max-width: 45ch;
     border-radius: 0.5rem;
     overflow: hidden;
-
+    
     transition: transform 500ms ease;
 }
 
@@ -39,7 +40,29 @@ body {
         hsl(20 0% 0% / 0.3) 20%,
         hsl(0 0% 0% / 1)
     );
+    transform: translateY(63%);
+    transition: transform 500ms ease;
+}
 
+.card:hover .card-content,
+.card:focus-within .card-content {
+    transform: translateY(0);
+    transition-delay: 300ms;
+}
+
+.card:focus-within .card-content {
+    transition-duration: 0ms;
+}
+
+.card-content > *:not(.card-title) {
+    opacity: 0;
+    transition: opacity 500ms linear;
+}
+
+.card:hover .card-content > *:not(.card-title),
+.card:focus-within .card-content > *:not(.card-title) {
+    opacity: 1;
+    transition-delay: 500ms;
 }
 
 .card-title {
@@ -55,9 +78,13 @@ body {
     width: calc(100% + var(--padding));
     left: calc(var(--padding) * -0.68);
     bottom: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 500ms ease;
 }
 
-.card-hover .card-title::after {
+.card:hover .card-title::after,
+.card:focus-within .card-title::after {
     transform: scaleX(1);
 }
 
@@ -66,7 +93,8 @@ body {
     color: var(--clr-neutral-100) / 0.60;
 }
 
-.card:hover {
+.card:hover,
+.card:focus-within {
     transform: scale(1.05);
 }
 
